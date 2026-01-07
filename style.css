@@ -25,7 +25,7 @@ h1 {
   font-family: "Alice", serif;
   font-weight: 900;
   font-style: normal;
-  font-size: 70px;
+  font-size: 60px;
   color: #bfa16a;
 }
 
@@ -528,4 +528,5 @@ body.eventsPage .panel h2 {
 @media (max-width: 600px){
   .footer-form iframe{ height: 620px; }
 }
+
 
