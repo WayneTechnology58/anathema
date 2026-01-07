@@ -529,4 +529,33 @@ body.eventsPage .panel h2 {
   .footer-form iframe{ height: 620px; }
 }
 
+/* ===== Intro overlay ===== */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;                 /* above nav */
+  display: grid;
+  place-items: center;
+  background: rgba(15, 20, 30, 0.35); /* optional: soft veil */
+  backdrop-filter: blur(2px);         /* optional */
+  transition: opacity 500ms ease, visibility 500ms ease;
+}
 
+/* Hide the “bottom” fan until intro ends */
+.tarot-fan--bottom {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+/* When intro is done… */
+body.intro-done .intro-overlay {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body.intro-done .tarot-fan--bottom {
+  opacity: 1;
+  transform: translateY(0);
+}
