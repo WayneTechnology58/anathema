@@ -47,3 +47,12 @@ function renderCards(containerId, cards) {
 document.addEventListener("DOMContentLoaded", () => {
   renderCards("cardGrid", cardData);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Match your fan animation length (900ms) + last delay (360ms) + a small cushion
+  const INTRO_MS = 2000;
+
+  window.setTimeout(() => {
+    document.body.classList.add("intro-done");
+  }, INTRO_MS);
+});
