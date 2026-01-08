@@ -1,11 +1,11 @@
 // Plain cards component: render a list of cards into a container
 
 const cardData = [
-  { img: "emma.jpg",
+  { img: "emma.webp",
     title: "Emma", text: "Emma is an Angel Tarot Reader who weaves together messages from a variety of decks, offering extra clarity and depth.", href: "https://bookwhen.com/anathematarot" },
-  { img: "anca.jpg",
+  { img: "anca.webp",
     title: "Anca", text: "A natural born reader, this wonderful soul was gifted her first deck as a baby. If you need clarity and insight, look no further." , href: "https://bookwhen.com/anathematarot" },
-  { img: "michelle.jpg",
+  { img: "michelle.webp",
     title: "Michelle & Vic", text: "Vic and Michelle are lifelong scholars and practitioners of the Western Mystery Tradition, each with over 40 years of experience in tarot and many other forms of divination.", href: "https://bookwhen.com/anathematarot" },
   
 ];
@@ -56,3 +56,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("intro-done");
   }, INTRO_MS);
 });
+
