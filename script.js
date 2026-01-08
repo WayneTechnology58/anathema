@@ -6,7 +6,7 @@ const cardData = [
   { img: "anca.webp",
     title: "Anca", text: "A natural born reader, this wonderful soul was gifted her first deck as a baby. If you need clarity and insight, look no further." , href: "https://bookwhen.com/anathematarot" },
   { img: "michelle.webp",
-    title: "Michelle & Vic", text: "Vic and Michelle are lifelong scholars and practitioners of the Western Mystery Tradition, each with over 40 years of experience in tarot and many other forms of divination.", href: "https://bookwhen.com/anathematarot" },
+    title: "Michele & Vic", text: "Vic and Michele are lifelong scholars and practitioners of the Western Mystery Tradition, each with over 40 years of experience in tarot and many other forms of divination.", href: "https://bookwhen.com/anathematarot" },
   
 ];
 
@@ -56,4 +56,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("intro-done");
   }, INTRO_MS);
 });
+
 
