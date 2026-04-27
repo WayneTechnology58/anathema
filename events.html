@@ -1,385 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anathema</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alice&display=swap" rel="stylesheet">
-<link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Site Under Construction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:    #0d0d0d;
+      --paper:  #f0ece3;
+      --accent: #c8410a;
+      --muted:  #9e9a92;
+    }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Decorative diagonal stripe band */
+    .stripe-band {
+      position: fixed;
+      top: -40%;
+      left: -10%;
+      width: 120%;
+      height: 38%;
+      background: repeating-linear-gradient(
+        -55deg,
+        var(--accent) 0px,
+        var(--accent) 14px,
+        transparent 14px,
+        transparent 34px
+      );
+      opacity: 0.08;
+      transform: rotate(-8deg);
+      pointer-events: none;
+    }
+
+    .wrapper {
+      position: relative;
+      max-width: 680px;
+      width: 90%;
+      padding: 3.5rem 3rem 3rem;
+      border: 2px solid var(--ink);
+      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    /* Corner accent squares */
+    .wrapper::before,
+    .wrapper::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+    }
+    .wrapper::before { top: -7px; left: -7px; }
+    .wrapper::after  { bottom: -7px; right: -7px; }
+
+    .label {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 9vw, 6.5rem);
+      line-height: 0.93;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.3em;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .divider {
+      width: 100%;
+      height: 2px;
+      background: var(--ink);
+      margin: 1.6rem 0;
+      position: relative;
+    }
+    .divider::after {
+      content: '◆';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.55rem;
+      color: var(--accent);
+      background: var(--paper);
+      padding-left: 6px;
+    }
+
+    .body-text {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: #3a3732;
+      max-width: 44ch;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2.4rem;
+    }
+
+    .pulse-dot {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .pulse-dot::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    .year {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.3; transform: scale(0.75); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
-<body class="eventsPage">
-    <header>
-        <nav class="nav">
-  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+<body>
+  <div class="stripe-band"></div>
 
-  <label for="nav-toggle" class="burger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </label>
-
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="markets.html">Markets</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="tarot.html">Tarot Readings</a></li>
-     <li><a href="collab.html">Collaborate</a></li>
-    <li><a href="https://www.anathema.uk" target="_blank">Shop</a></li>
-  </ul>
-</nav>
-
-    </header>
-    <main class="hero">
-         
-        <section class="panel"><h2>Upcoming Events</h2> </section>
-     <section class="events-list">
-
- 
-
-
-
- 
-
-  <!--<details class="event-card">
-    <summary class="event-summary">
-      <span class="event-title">TAROT FOCUS The Empress & The High Priestess : Creativity and Mystery</span>
-
-      <span class="event-meta">
-        <span class="event-date">Wed 11th Feb</span>
-        <span class="event-chevron">▾</span>
-      </span>
-    </summary>
-
-        <div class="event-details">
-      <p><strong>Time:</strong>6:30pm - 8:30pm</p>
-      <p><strong>Location:</strong>  Da Nunzio Italian Delicatessen, 14 Royal Arcade, Boscombe, Bournemouth, BH1 4BT</p>
-      <p><strong>What to expect:Join the Dance around the World of Tarot with Vic and Michele from Witchways of Dorset. </strong></p>
-      <p><strong>Tickets:</strong> £22 - £37 · Limited spaces</p>
-      <a class="event-link" href="https://bookwhen.com/anathema/e/ev-sihql-20260211183000" target="_blank" rel="noopener">Book / More info</a>
+  <div class="wrapper">
+    <p class="label">Status update</p>
+    <h1>Under<br/><span>Construction</span></h1>
+    <div class="divider"></div>
+    <p class="body-text">
+      This site is currently being edited and updated.<br/>
+      Please check back soon — something worth the wait is on its way.
+    </p>
+    <div class="footer-row">
+      <span class="pulse-dot">Active development</span>
+      <span class="year">© 2026</span>
     </div>
-  </details> -->
-
-
-
-
-  <!-- <details class="event-card">
-    <summary class="event-summary">
-      <span class="event-title">AMULETS, CHARMS and TALISMANS WORKSHOP</span>
-
-      <span class="event-meta">
-        <span class="event-date">Wed 18th Feb</span>
-        <span class="event-chevron">▾</span>
-      </span>
-    </summary>
-
-        <div class="event-details">
-      <p><strong>Time:</strong>6:30pm - 8:30pm</p>
-      <p><strong>Location:</strong>  Da Nunzio Italian Delicatessen, 14 Royal Arcade, Boscombe, Bournemouth, BH1 4BT</p>
-      <p><strong>What to expect:Join us as we take a tour of the ways in which we have always warded off dangers, drawn luck and conjured outcomes using a wide variety of materials since ancient civilisations began.</strong></p>
-      <p><strong>Tickets:</strong> £22 · Limited spaces</p>
-      <a class="event-link" href="https://bookwhen.com/anathema/e/ev-spq59-20260218183000" target="_blank" rel="noopener">Book / More info</a>
-    </div>
-  </details> -->
-
-
-
-  <!--<details class="event-card">
-    <summary class="event-summary">
-      <span class="event-title"></span>
-
-      <span class="event-meta">
-        <span class="event-date"></span>
-        <span class="event-chevron">▾</span>
-      </span>
-    </summary>
-
-        <div class="event-details">
-      <p><strong>Time:</strong>6:30pm - 8:30pm</p>
-      <p><strong>Location:</strong>  Da Nunzio Italian Delicatessen, 14 Royal Arcade, Boscombe, Bournemouth, BH1 4BT</p>
-      <p><strong>What to expect: </strong></p>
-      <p><strong>Tickets:</strong> £22 - £37 · Limited spaces</p>
-      <a class="event-link" href="" target="_blank" rel="noopener">Book / More info</a>
-    </div>
-  </details> -->
-
-     
-
- 
-
-
-
-
-
-
-
-
-  <br><details class="event-card">
-    <summary class="event-summary">
-      <span class="event-title">Foundations of the Craft: Building Your Pagan Path. Lecture 7</span>
-
-      <span class="event-meta">
-        <span class="event-date">Fri 17th Apr</span>
-        <span class="event-chevron">▾</span>
-      </span>
-    </summary>
-
-        <div class="event-details">
-      <p><strong>Time:</strong>7:00pm - 9:00pm</p>
-      <p><strong>Location:</strong>  Da Nunzio Italian Delicatessen, 14 Royal Arcade, Boscombe, Bournemouth, BH1 4BT</p>
-      <p><strong>What to expect: </strong> A 10-Part Lecture Series on Witchcraft, Paganism, and Personal Practice
-
-Lecture 7 – Magic in Practice: Types, Timing, and the Moon
-<br>• Overview of magical workings: candle magic, charms, poppets, chants, oils, incense.
-<br>• Choosing the right form of magic for intention.
-<br>• Lunar cycles and moon magic (esbats, full moons, dark moons).</p>
-      <p><strong>Tickets:</strong> £22 · Limited spaces</p>
-      <a class="event-link" href="https://bookwhen.com/anathema/e/ev-sos2q-20260417190000" target="_blank" rel="noopener">Book / More info</a>
-    </div>
-  </details>
-
-  <details class="event-card">
-    <summary class="event-summary">
-      <span class="event-title">SPELLCRAFT - MONEY MAGIC TECHNIQUES</span>
-
-      <span class="event-meta">
-        <span class="event-date">WED 22nd Apr</span>
-        <span class="event-chevron">▾</span>
-      </span>
-    </summary>
-
-        <div class="event-details">
-      <p><strong>Time:</strong>6:30pm - 8:30pm</p>
-      <p><strong>Location:</strong>  Da Nunzio Italian Delicatessen, 14 Royal Arcade, Boscombe, Bournemouth, BH1 4BT</p>
-      <p><strong>What to expect: </strong> MONEY MAGIC TECHNIQUES - Conjuring financial abundance.
-
-Tonight we will look at magical techniques used for attracting good fortune across the centuries. You will come away with skills to put to immediate use in creating the best conditions to boost the coffers!</p>
-      <p><strong>Tickets:</strong> £18 · Limited spaces</p>
-      <a class="event-link" href="https://bookwhen.com/anathema/e/ev-st4x3-20260422183000" target="_blank" rel="noopener">Book / More info</a>
-    </div>
-  </details>
-
-  <details class="event-card">
-    <summary class="event-summary">
-      <span class="event-title">HEDGEROW MAGIC: CRAFTING HERBAL SMUDGE STICKS</span>
-
-      <span class="event-meta">
-        <span class="event-date">Wed 29th Apr</span>
-        <span class="event-chevron">▾</span>
-      </span>
-    </summary>
-
-        <div class="event-details">
-      <p><strong>Time:</strong>6:30pm - 8:45pm</p>
-      <p><strong>Location:</strong>  Da Nunzio Italian Delicatessen, 14 Royal Arcade, Boscombe, Bournemouth, BH1 4BT</p>
-      <p><strong>What to expect: </strong>Join us for a heartwarming evening with our favorite hedgewitch, Totty, right here at the Royal Arcade’s own Da Nunzio corner.
-
-We’ll be delving into the magic of locally gathered herbs and flowers and learning how to craft our own enchanting smudge sticks from scratch.</p>
-      <p><strong>Tickets:</strong> £35 · Limited spaces</p>
-      <a class="event-link" href="https://bookwhen.com/anathema/e/ev-skktr-20260429183000" target="_blank" rel="noopener">Book / More info</a>
-    </div>
-  </details>
-
-
-  <details class="event-card">
-    <summary class="event-summary">
-      <span class="event-title">Foundations of the Craft: Building Your Pagan Path. Lecture 8</span>
-
-      <span class="event-meta">
-        <span class="event-date">Fri 1st May</span>
-        <span class="event-chevron">▾</span>
-      </span>
-    </summary>
-
-        <div class="event-details">
-      <p><strong>Time:</strong>7:00pm - 9:00pm</p>
-      <p><strong>Location:</strong>  Da Nunzio Italian Delicatessen, 14 Royal Arcade, Boscombe, Bournemouth, BH1 4BT</p>
-      <p><strong>What to expect: Lecture 8 – The Wheel of the Year: Pagan Festivals and Seasonal Living
-<br>• Introduction to the Sabbats and the cycle of the seasons.
-<br>• Agricultural, solar, and mythic layers of the festivals.
-<br> • Living seasonally and ritually attuned.</strong></p>
-      <p><strong>Tickets:</strong> £22 · Limited spaces</p>
-      <a class="event-link" href="https://bookwhen.com/anathema/e/ev-sq589-20260501190000" target="_blank" rel="noopener">Book / More info</a>
-    </div>
-  </details>
-
-
-  <details class="event-card">
-    <summary class="event-summary">
-      <span class="event-title">First Wednesday Tarot Club</span>
-
-      <span class="event-meta">
-        <span class="event-date">Wed 6th May</span>
-        <span class="event-chevron">▾</span>
-      </span>
-    </summary>
-
-        <div class="event-details">
-      <p><strong>Time:</strong>6:30pm - 8:30pm</p>
-      <p><strong>Location:</strong>  Da Nunzio Italian Delicatessen, 14 Royal Arcade, Boscombe, Bournemouth, BH1 4BT</p>
-      <p><strong>What to expect: First Wednesday Tarot Club
-
-A friendly, relaxed tarot club for anyone who wants to deepen their relationship with the cards, whether you’re just starting out or have been reading for years.
-<br>
-Each month we’ll explore themes from the Tarot Focus classes, beginning with a gentle, accessible teaching section that looks at the cards, symbolism, and how they show up in real readings. No pressure, no tests - just shared learning and curiosity.
-<br>
-The second half of the session is all about practice. We’ll read together, ask questions, try spreads, and build confidence in a supportive space. This part of the evening is tailored to the group, allowing us to go deeper where needed, explore different reading styles, and help you trust your own tarot voice.
-<br>
-All abilities are welcome. Bring your own Rider Waite Smith deck if you have one, or we can loan you a deck if this is your first experience of tarot.
-<br>
-Whether you’re learning the basics, refining your intuition, or looking for a regular space to read with others, this club is about connection, confidence, and learning together. </strong></p>
-      <p><strong>Tickets:</strong> £18 - £33 · Limited spaces</p>
-      <a class="event-link" href="https://bookwhen.com/anathema/e/ev-s3e42-20260506183000" target="_blank" rel="noopener">Book / More info</a>
-    </div>
-  </details>
-
-  <details class="event-card">
-    <summary class="event-summary">
-      <span class="event-title">Foundations of the Craft: Building Your Pagan Path. Lecture 9 </span>
-
-      <span class="event-meta">
-        <span class="event-date">Fri 15th May</span>
-        <span class="event-chevron">▾</span>
-      </span>
-    </summary>
-
-        <div class="event-details">
-      <p><strong>Time:</strong>7:00pm - 9:00pm</p>
-      <p><strong>Location:</strong>  Da Nunzio Italian Delicatessen, 14 Royal Arcade, Boscombe, Bournemouth, BH1 4BT</p>
-      <p><strong>What to expect:Foundations of the Craft: Building Your Pagan Path
-
-A 10-Part Lecture Series on Witchcraft, Paganism, and Personal Practice
-
-Lecture 9 – Divination as Dialogue: Tools for Insight
-<br>• Introduction to divination: tarot, runes, pendulums, scrying.
-<br>• Divination as guidance, not prediction.
-<br>• How divination supports magical and spiritual practice. </strong></p>
-      <p><strong>Tickets:</strong> £22 · Limited spaces</p>
-      <a class="event-link" href="https://bookwhen.com/anathema/e/ev-s6d84-20260515190000" target="_blank" rel="noopener">Book / More info</a>
-    </div>
-  </details>
-
-<details class="event-card">
-    <summary class="event-summary">
-      <span class="event-title">Confidence & Visibility - Inner Blueprint Re-Coding Series</span>
-
-      <span class="event-meta">
-        <span class="event-date">Wed 20th May</span>
-        <span class="event-chevron">▾</span>
-      </span>
-    </summary>
-
-        <div class="event-details">
-      <p><strong>Time:</strong>6:30pm - 8:30pm</p>
-      <p><strong>Location:</strong>  Da Nunzio Italian Delicatessen, 14 Royal Arcade, Boscombe, Bournemouth, BH1 4BT</p>
-      <p><strong>What to expect: A face-to-face ThetaHealing group workshop with CmV Synergy
-<br>
-You know you're capable. You've seen it. Other people have seen it.
-And yet something shifts the moment visibility increases - a familiar pull toward the back, a spiral of second-guessing, a confidence that holds in private but quietly disappears when it matters most.
-<br>
-How you show up in the world is shaped by beliefs formed long before you had a say in them about what happens when you're seen, what judgment means, what success costs, and whether it's actually safe to be known.
-These beliefs run automatically, overriding what you consciously want.
-<br>
-This session works directly with those internal rules.
-<br>
-Using ThetaHealing - a structured, meditative method for working with the subconscious - we clear the beliefs that tie visibility to threat and replace them with programs that allow confidence to stabilise and showing up to feel like a choice rather than a risk. </strong></p>
-      <p><strong>Tickets:</strong> £20 · Limited spaces</p>
-      <a class="event-link" href="https://bookwhen.com/anathema/e/ev-sqazc-20260520183000" target="_blank" rel="noopener">Book / More info</a>
-    </div>
-  </details>
-
-<details class="event-card">
-    <summary class="event-summary">
-      <span class="event-title">Foundations of the Craft: Building Your Pagan Path. Lecture 10</span>
-
-      <span class="event-meta">
-        <span class="event-date">Fri 22nd May</span>
-        <span class="event-chevron">▾</span>
-      </span>
-    </summary>
-
-        <div class="event-details">
-      <p><strong>Time:</strong>7:00pm - 9:00pm</p>
-      <p><strong>Location:</strong>  Da Nunzio Italian Delicatessen, 14 Royal Arcade, Boscombe, Bournemouth, BH1 4BT</p>
-      <p><strong>What to expect:Foundations of the Craft: Building Your Pagan Path
-
-A 10-Part Lecture Series on Witchcraft, Paganism, and Personal Practice
-<br>
-Lecture 10 – Spellcraft: Writing, Weaving, and Working Magic
-<br>• The anatomy of a spell: intention, timing, correspondences, effort.
-<br>• Writing and performing spells.
-<br>• Integrating spellcraft into daily and seasonal practice. </strong></p>
-      <p><strong>Tickets:</strong> £22 - £37 · Limited spaces</p>
-      <a class="event-link" href="https://bookwhen.com/anathema/e/ev-sk1cs-20260522190000" target="_blank" rel="noopener">Book / More info</a>
-    </div>
-  </details>
-
-  <details class="event-card">
-    <summary class="event-summary">
-      <span class="event-title">SPELLCRAFT - PLANETARY MAGIC</span>
-
-      <span class="event-meta">
-        <span class="event-date">Fri 29th May</span>
-        <span class="event-chevron">▾</span>
-      </span>
-    </summary>
-
-        <div class="event-details">
-      <p><strong>Time:</strong>6:30pm - 8:30pm</p>
-      <p><strong>Location:</strong>  Da Nunzio Italian Delicatessen, 14 Royal Arcade, Boscombe, Bournemouth, BH1 4BT</p>
-      <p><strong>What to expect: Spellcraft - Planetary magic <br>
-Developing your magical practice on a simple daily basis.
-<br>
-In this session, we look at the Seven Classical Planets of Western Magic, their magical correspondences and qualities. We will show you how you can incorporate the planets into a rewarding and simple daily practice that will boost your magical skills. </strong></p>
-      <p><strong>Tickets:</strong> £22 · Limited spaces</p>
-      <a class="event-link" href="https://bookwhen.com/anathema/e/ev-sqzav-20260529183000" target="_blank" rel="noopener">Book / More info</a>
-    </div>
-  </details>
-
-</section>
-
-
-
- <section class="panel">
-       <h2>Looking to trade at one of our markets?</h2>
-        <p>We are always looking for unique and interesting stalls to join our markets. If you are interested in trading with us, please click the following link and fill out an application.</p>
-        <a href="https://forms.zohopublic.eu/anathema1/form/WitchMarketApplicationform/formperma/JUxS5E8cwoWf98-upuhOY9cdFM8ajIrKb0lNnM6NpKs" target="_blank" rel="noopener">Trader Application Form</a>
-
-    </section>
-        
-
-
-    </main>
-
-     <footer>
-        <a class="magic-mail-link" target="_blank"
-   href="https://forms.zohopublic.eu/anathema1/form/EmailSubscription/formperma/ip3TNXTq2Chgq_fKPzc0oKG2KaFupAk8ZDelrM1_9Jw">
-  <p>Join our Magic Mail Newsletter</p>
-</a>
-  
-
-  <div class="social-icons">
-    <a href="https://www.facebook.com/AnathemaEmporium" target="_blank" aria-label="Facebook">
-      <i class="fa-brands fa-facebook-f"></i>
-    </a>
-
-    <a href="https://www.instagram.com/anathema.emporium/" target="_blank" aria-label="Instagram">
-      <i class="fa-brands fa-instagram"></i>
-    </a>
-
-    <a href="https://www.tiktok.com/@anathema.emporium" target="_blank" aria-label="TikTok">
-      <i class="fa-brands fa-tiktok"></i>
-    </a>
   </div>
-  <p>&copy; 2026 Anathema. All rights reserved. Site created and managed by <a href="https://waynetechnology.co.uk/">Wayne Technology</a></p>
-
-
-</footer>
 </body>
 </html>
