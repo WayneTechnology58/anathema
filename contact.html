@@ -1,83 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anathema</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alice&display=swap" rel="stylesheet">
-<link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Site Under Construction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:    #0d0d0d;
+      --paper:  #f0ece3;
+      --accent: #c8410a;
+      --muted:  #9e9a92;
+    }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Decorative diagonal stripe band */
+    .stripe-band {
+      position: fixed;
+      top: -40%;
+      left: -10%;
+      width: 120%;
+      height: 38%;
+      background: repeating-linear-gradient(
+        -55deg,
+        var(--accent) 0px,
+        var(--accent) 14px,
+        transparent 14px,
+        transparent 34px
+      );
+      opacity: 0.08;
+      transform: rotate(-8deg);
+      pointer-events: none;
+    }
+
+    .wrapper {
+      position: relative;
+      max-width: 680px;
+      width: 90%;
+      padding: 3.5rem 3rem 3rem;
+      border: 2px solid var(--ink);
+      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    /* Corner accent squares */
+    .wrapper::before,
+    .wrapper::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+    }
+    .wrapper::before { top: -7px; left: -7px; }
+    .wrapper::after  { bottom: -7px; right: -7px; }
+
+    .label {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 9vw, 6.5rem);
+      line-height: 0.93;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.3em;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .divider {
+      width: 100%;
+      height: 2px;
+      background: var(--ink);
+      margin: 1.6rem 0;
+      position: relative;
+    }
+    .divider::after {
+      content: '◆';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.55rem;
+      color: var(--accent);
+      background: var(--paper);
+      padding-left: 6px;
+    }
+
+    .body-text {
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: #3a3732;
+      max-width: 44ch;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2.4rem;
+    }
+
+    .pulse-dot {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .pulse-dot::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    .year {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.3; transform: scale(0.75); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
-<body class="contactPage">
-    <header>
-        <nav class="nav">
-  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+<body>
+  <div class="stripe-band"></div>
 
-  <label for="nav-toggle" class="burger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </label>
-
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="markets.html">Markets</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="tarot.html">Tarot Readings</a></li>
-     <li><a href="collab.html">Collaborate</a></li>
-    <li><a href="https://www.anathema.uk" target="_blank">Shop</a></li>
-  </ul>
-</nav>
-
-    </header>
-    <main class="hero">
-        <section class="panel">
-        <h2>Contact Us</h2>
-        <p>If you have any questions or would like to get in touch, please reach out to us at:</p>
-        <p>Email: <a href="mailto:emmaanathema@gmail.com">emmaanathema@gmail.com</a></p>
-
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2525.6345029200284!2d-1.8410022000000004!3d50.726719599999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4873a1ba36a88461%3A0xc88fbc4c1edc6db7!2sAnathema%20-%20Dedicated%20Witchcraft%20Emporium!5e0!3m2!1sen!2suk!4v1767101456662!5m2!1sen!2suk" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            
-    </section>
-
-
-    <section class="panel">
-       <h2>Looking to trade at one of our markets?</h2>
-        <p>We are always looking for unique and interesting stalls to join our markets. If you are interested in trading with us, please click the following link and fill out an application.</p>
-        <a href="https://forms.zohopublic.eu/anathema1/form/WitchMarketApplicationform/formperma/JUxS5E8cwoWf98-upuhOY9cdFM8ajIrKb0lNnM6NpKs" target="_blank" rel="noopener">Trader Application Form</a>
-
-    </section>
-        
-        
-        </main>
-     <footer>
-        <a class="magic-mail-link" target="_blank"
-   href="https://forms.zohopublic.eu/anathema1/form/EmailSubscription/formperma/ip3TNXTq2Chgq_fKPzc0oKG2KaFupAk8ZDelrM1_9Jw">
-  <p>Join our Magic Mail Newsletter</p>
-</a>
-  
-
-  <div class="social-icons">
-    <a href="https://www.facebook.com/AnathemaEmporium" target="_blank" aria-label="Facebook">
-      <i class="fa-brands fa-facebook-f"></i>
-    </a>
-
-    <a href="https://www.instagram.com/anathema.emporium/" target="_blank" aria-label="Instagram">
-      <i class="fa-brands fa-instagram"></i>
-    </a>
-
-    <a href="https://www.tiktok.com/@anathema.emporium" target="_blank" aria-label="TikTok">
-      <i class="fa-brands fa-tiktok"></i>
-    </a>
+  <div class="wrapper">
+    <p class="label">Status update</p>
+    <h1>Under<br/><span>Construction</span></h1>
+    <div class="divider"></div>
+    <p class="body-text">
+      This site is currently being edited and updated.<br/>
+      Please check back soon — something worth the wait is on its way.
+    </p>
+    <div class="footer-row">
+      <span class="pulse-dot">Active development</span>
+      <span class="year">© 2026</span>
+    </div>
   </div>
-  <p>&copy; 2026 Anathema. All rights reserved. Site created and managed by <a href="https://waynetechnology.co.uk/">Wayne Technology</a></p>
-
-
-</footer>
 </body>
 </html>
